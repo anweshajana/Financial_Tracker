@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Tracker - Personal Finance Manager</title>
+
+    <!-- <link rel="stylesheet" href="moneyTracker_styles.css"> -->
     
     <!-- Include jsPDF for PDF export functionality -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -131,6 +133,44 @@
         }
 
         .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .logout-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .home-btn {
+            padding: 0.5rem 1.5rem;
+            background: var(--info-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
@@ -754,6 +794,14 @@
                 <span class="logo-text">Money Tracker</span>
             </div>
             <div class="header-actions">
+                <button class="logout-btn" onclick="handleLogout()">
+                    <span>🚪</span>
+                    <span>Log-out</span>
+                </button>
+                <button class="home-btn" onclick="goToHome()">
+                    <span>🏠</span>
+                    <span>Back to Home</span>
+                </button>
                 <button class="export-btn" onclick="exportToPDF()">
                     <span>📄</span>
                     <span>Export to PDF</span>
@@ -942,7 +990,7 @@
             savings: ['Emergency Fund', 'Retirement', 'Investment', 'Vacation', 'Home', 'Other Savings']
         };
 
-        // Initialize the app
+        // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             // Set today's date as default
             document.getElementById('date').valueAsDate = new Date();
@@ -1286,6 +1334,24 @@
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
+        }
+
+        // New functions for logout and home navigation
+        function handleLogout() {
+            if (confirm('Are you sure you want to log out?')) {
+                // Clear any session data if needed
+                // For example: localStorage.removeItem('userToken');
+                
+                // Redirect to login page
+                window.location.href = 'index.html';
+                showToast('Logged out successfully!', 'success');
+            }
+        }
+
+        function goToHome() {
+            if (confirm('Are you sure you want to go back to the home page?')) {
+                window.location.href = 'index.html';
+            }
         }
     </script>
 </body>
